@@ -3,7 +3,7 @@ import About from './components/home/About'
 import Hero from './components/home/Hero'
 import Skills from './components/home/Skills'
 import Navbar from './Layout/Navbar'
-
+import { Analytics } from '@vercel/analytics/next';
 import Project from './components/home/Project'
 import Contact from './components/contact/Contact'
 import Experience from './components/home/Experience'
@@ -26,6 +26,7 @@ function App() {
     <Contact/>
     <Footer/>
     </div>
+    <Analytics />
     </>
   );
 }
