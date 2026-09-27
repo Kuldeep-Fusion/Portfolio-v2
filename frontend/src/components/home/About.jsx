@@ -899,98 +899,105 @@ const About = () => {
               BOTTOM STATS + CTA
           ================================================= */}
 
-          <div className="relative z-10 mx-auto mt-9 flex max-w-4xl flex-col items-center justify-between gap-6 border-t border-white/5 pt-6 sm:flex-row">
+          <div className="relative z-10 mx-auto mt-9 flex max-w-4xl flex-col gap-6 border-t border-white/5 pt-6 sm:gap-8 lg:flex-row lg:items-center lg:justify-between">
 
-            {/* Stats */}
+  {/* Stats */}
+  <div className="grid w-full grid-cols-2 gap-y-5 sm:flex sm:w-auto sm:items-center sm:gap-6">
 
-            <div className="flex items-center gap-6">
-              <Stat
-                value="3+"
-                label="Years"
-                delay={0.2}
-              />
+    <Stat
+      value="3+"
+      label="Years"
+      delay={0.2}
+    />
 
-              <div className="h-8 w-px bg-white/5" />
+    <div className="hidden h-8 w-px bg-white/5 sm:block" />
 
-              <Stat
-                value="40%"
-                label="AI Velocity"
-                delay={0.3}
-              />
+    <Stat
+      value="40%"
+      label="AI Velocity"
+      delay={0.3}
+    />
 
-              <div className="h-8 w-px bg-white/5" />
+    <div className="hidden h-8 w-px bg-white/5 sm:block" />
 
-              <Stat
-                value="500+"
-                label="SKUs Managed"
-                delay={0.4}
-              />
+    <Stat
+      value="500+"
+      label="SKUs Managed"
+      delay={0.4}
+    />
 
-              <div className="h-8 w-px bg-white/5" />
+    <div className="hidden h-8 w-px bg-white/5 sm:block" />
 
-              <Stat
-                value="99.5%"
-                label="Uptime"
-                delay={0.5}
-              />
-            </div>
+    <Stat
+      value="99.5%"
+      label="Uptime"
+      delay={0.5}
+    />
 
-            {/* CTA */}
+  </div>
 
-            <motion.a
-              href="#projects"
-              initial={{
-                opacity: 0,
-                x: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: 0.55,
-                duration: 0.5,
-              }}
-              whileHover={{
-                y: -2,
-              }}
-              whileTap={{
-                scale: 0.97,
-              }}
-              className="
-                group/btn
-                flex
-                shrink-0
-                items-center
-                gap-3
-                rounded-md
-                border
-                border-lime-400/30
-                bg-lime-400/5
-                px-5
-                py-2.5
-                font-mono
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-widest
-                text-lime-400
-                transition-all
-                duration-300
-                hover:border-lime-400
-                hover:bg-lime-400
-                hover:text-black
-                hover:shadow-[0_0_25px_rgba(132,255,0,0.25)]
-              "
-            >
-              Explore My Work
+  {/* CTA */}
+  <motion.a
+    href="#projects"
+    initial={{
+      opacity: 0,
+      x: 20,
+    }}
+    whileInView={{
+      opacity: 1,
+      x: 0,
+    }}
+    viewport={{
+      once: true,
+    }}
+    transition={{
+      delay: 0.55,
+      duration: 0.5,
+    }}
+    whileHover={{
+      y: -2,
+    }}
+    whileTap={{
+      scale: 0.97,
+    }}
+    className="
+      group/btn
+      flex
+      w-full
+      shrink-0
+      items-center
+      justify-center
+      gap-3
+      rounded-md
+      border
+      border-lime-400/30
+      bg-lime-400/5
+      px-5
+      py-3
+      font-mono
+      text-[9px]
+      font-bold
+      uppercase
+      tracking-widest
+      text-lime-400
+      transition-all
+      duration-300
+      hover:border-lime-400
+      hover:bg-lime-400
+      hover:text-black
+      hover:shadow-[0_0_25px_rgba(132,255,0,0.25)]
+      sm:w-auto
+      sm:py-2.5
+    "
+  >
+    Explore My Work
 
-              <FaArrowRight className="transition-transform duration-300 group-hover/btn:translate-x-1" />
-            </motion.a>
-          </div>
+    <FaArrowRight
+      className="transition-transform duration-300 group-hover/btn:translate-x-1"
+    />
+  </motion.a>
+
+</div>
 
           {/* =================================================
               BOTTOM HUD

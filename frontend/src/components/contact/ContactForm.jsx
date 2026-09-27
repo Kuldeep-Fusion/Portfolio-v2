@@ -1,5 +1,7 @@
+import { PostContact } from "@/services/api";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 const initialFormData = {
   name: "",
@@ -90,43 +92,36 @@ const ContactForm = ({ rotateX, rotateY, handleFormMove, resetFormMotion }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  if (!validateForm()) {
+    return;
+  }
 
-    // Validate before API request
-    if (!validateForm()) {
-      return;
-    }
+  try {
+    setLoading(true);
 
-    try {
-      setLoading(true);
+    const response = await PostContact(formData);
 
-      const response = await fetch("http://localhost:8000/api/contact/form", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    toast.success(
+      response?.data?.message || "Message sent successfully!"
+    );
 
-      const data = await response.json();
+    setFormData(initialFormData);
+    setErrors({});
 
-      if (!response.ok) {
-        throw new Error(data.message || "Something went wrong");
-      }
+  } catch (error) {
+    console.error("SUBMIT ERROR:", error);
 
-      console.log("Success:", data);
-
-      // Reset form
-      setFormData(initialFormData);
-      setErrors({});
-    } catch (error) {
-      console.error("Submit Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    console.error(
+      "ERROR MESSAGE:",
+      error.response?.data?.message || error.message
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <motion.div
@@ -169,6 +164,19 @@ const ContactForm = ({ rotateX, rotateY, handleFormMove, resetFormMotion }) => {
         md:p-7
       "
     >
+<ToastContainer
+  position="top-center"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop
+  closeOnClick
+  pauseOnHover
+  draggable
+  theme="dark"
+  toastClassName="!rounded-none !border !border-[#9CFF00]/30 !bg-[#050805] !text-white !shadow-[0_0_35px_rgba(156,255,0,0.12)]"
+  bodyClassName="!p-0 !text-[11px] !font-bold !uppercase !tracking-[0.08em]"
+  progressClassName="!bg-[#9CFF00]"
+/>
       {/* Top Glow */}
       <motion.div
         initial={{

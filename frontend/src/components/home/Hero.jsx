@@ -145,7 +145,7 @@ const Hero = () => {
         min-h-screen
         max-w-7xl
         overflow-hidden
-        px-6
+        px-6 
       "
     >
 
@@ -286,8 +286,10 @@ const Hero = () => {
           grid
           min-h-[75vh]
           items-center
-          gap-16
-          py-16
+          gap-10
+          sm:gap-0
+          py-8
+          sm:py-2
 
           lg:grid-cols-[1.05fr_0.95fr]
           lg:py-10
@@ -385,12 +387,13 @@ const Hero = () => {
             <KineticText
               text="Kuldeep"
               className="
-                mb-[-1.5rem]
+                md:mb-[-1.5rem]
+                sm:mb-[-0rem]
                 p-0
                 text-6xl
                 font-black
                 uppercase
-                leading-[0.9]
+                md:leading-[0.9]
                 tracking-[-0.04em]
                 text-white
 
@@ -454,8 +457,8 @@ const Hero = () => {
                 uppercase
                 text-lime-400
                 drop-shadow-[0_0_10px_rgba(132,255,0,0.3)]
-
-                md:text-4xl
+                sm:text-3xl
+                md:text-3xl
               "
             />
 
