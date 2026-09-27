@@ -10,15 +10,28 @@ const app = express();
 ConnectDB();
 
 
-
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = [
+  "https://kuldeep-zeta.vercel.app",
+  "https://admincms-one.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use('/api/contact', ContactRoute);
 app.use('/api/project', ProjectRouter);
 app.use('/api/user', UserRouter);
 
-app.get('/',(req, res) => {
-    res, console.log("Server is runing")
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "API working 🚀",
+  });
 });
 
 export default app;
