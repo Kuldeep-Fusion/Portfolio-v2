@@ -529,9 +529,9 @@ const Hero = () => {
               "
             >
 
-              <span className="relative z-10">
-                View My Work
-              </span>
+              <a href="#work" className="relative z-10">
+                 View My Work
+              </a>
 
               <span
                 className="

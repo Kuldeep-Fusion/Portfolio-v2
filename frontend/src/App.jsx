@@ -5,7 +5,7 @@ import Skills from './components/home/Skills'
 import Navbar from './Layout/Navbar'
 
 import Project from './components/home/Project'
-import Contact from './components/home/Contact'
+import Contact from './components/contact/Contact'
 import Experience from './components/home/Experience'
 import Footer from './Layout/Footer'
 import StickyButton from './components/home/SticyButton'

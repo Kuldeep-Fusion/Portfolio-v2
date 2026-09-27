@@ -1,4 +1,3 @@
-
 import {
   motion,
   useMotionValue,
@@ -14,6 +13,7 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { SiLeetcode } from "react-icons/si";
 
+import ContactForm from "./ContactForm";
 
 const socials = [
   {
@@ -22,21 +22,18 @@ const socials = [
     icon: FaLinkedinIn,
     color: "#0A66C2",
   },
-
   {
     name: "GitHub",
     href: "https://github.com/Kuldeep-Fusion",
     icon: FaGithub,
     color: "#FFFFFF",
   },
-
   {
     name: "LeetCode",
     href: "https://leetcode.com/u/kuldeep-fusion/",
     icon: SiLeetcode,
     color: "#FFA116",
   },
-
   {
     name: "X",
     href: "https://x.com/kuldeep70218569?s=11",
@@ -44,8 +41,6 @@ const socials = [
     color: "#FFFFFF",
   },
 ];
-
-
 
 const SocialCard = ({ social, index }) => {
   const Icon = social.icon;
@@ -95,7 +90,7 @@ const SocialCard = ({ social, index }) => {
         hover:border-white/[0.15]
       "
     >
-      {/* Hover background */}
+      {/* Hover Background */}
       <div
         className="
           pointer-events-none
@@ -154,77 +149,11 @@ const SocialCard = ({ social, index }) => {
   );
 };
 
-
-const FormField = ({
-  label,
-  id,
-  type = "text",
-  placeholder,
-  delay = 0,
-}) => {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 12,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        delay,
-        duration: 0.45,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <label
-        htmlFor={id}
-        className="
-          mb-2
-          block
-          text-[8px]
-          font-bold
-          uppercase
-          tracking-[0.2em]
-          text-gray-600
-        "
-      >
-        {label}
-      </label>
-
-      <input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        className="
-          w-full
-          border
-          border-white/[0.08]
-          bg-[#020502]
-          px-3
-          py-3
-          text-xs
-          text-white
-          outline-none
-          transition-all
-          duration-300
-          placeholder:text-gray-700
-          hover:border-white/[0.14]
-          focus:border-[#9CFF00]/60
-          focus:bg-[#071007]
-          focus:shadow-[0_0_25px_rgba(156,255,0,0.06)]
-        "
-      />
-    </motion.div>
-  );
-};
-
 const Contact = () => {
+  // ============================================
+  // FORM 3D MOTION
+  // ============================================
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -240,8 +169,17 @@ const Contact = () => {
     mass: 0.4,
   });
 
-  const rotateX = useTransform(springY, [-100, 100], [0.8, -0.8]);
-  const rotateY = useTransform(springX, [-100, 100], [-0.8, 0.8]);
+  const rotateX = useTransform(
+    springY,
+    [-100, 100],
+    [0.8, -0.8]
+  );
+
+  const rotateY = useTransform(
+    springX,
+    [-100, 100],
+    [-0.8, 0.8]
+  );
 
   const handleFormMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -282,7 +220,10 @@ const Contact = () => {
           md:py-24
         "
       >
-        {/* Background glow */}
+        {/* =================================================
+            BACKGROUND GLOW
+        ================================================= */}
+
         <motion.div
           className="
             pointer-events-none
@@ -308,7 +249,10 @@ const Contact = () => {
           }}
         />
 
-        {/* Scanlines */}
+        {/* =================================================
+            SCANLINES
+        ================================================= */}
+
         <div
           className="
             pointer-events-none
@@ -346,6 +290,7 @@ const Contact = () => {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
+            {/* Section Number */}
             <div className="mb-5 flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em]">
               <span className="text-[#9CFF00]">
                 04
@@ -360,6 +305,7 @@ const Contact = () => {
               </span>
             </div>
 
+            {/* Heading */}
             <h2
               className="
                 text-4xl
@@ -372,18 +318,19 @@ const Contact = () => {
                 lg:text-7xl
               "
             >
-              LET'S BUILD {" "}
-              
+              LET'S BUILD{" "}
 
               <span className="text-[#9CFF00]">
                 SOMETHING.
               </span>
             </h2>
 
+            {/* Description */}
             <p className="mt-5 max-w-xl text-sm leading-6 text-gray-500 md:text-base md:leading-7">
-              Have a project in mind, an idea you'd like to explore,
-              or just want to talk tech? I'm always open to interesting
-              conversations and new opportunities.
+              Have a project in mind, an idea you'd like
+              to explore, or just want to talk tech?
+              I'm always open to interesting conversations
+              and new opportunities.
             </p>
           </motion.div>
 
@@ -401,7 +348,7 @@ const Contact = () => {
           >
 
             {/* =================================================
-                CONTACT INFO
+                LEFT SIDE — CONTACT INFO
             ================================================= */}
 
             <motion.div
@@ -430,6 +377,7 @@ const Contact = () => {
                 md:p-7
               "
             >
+
               {/* Availability */}
               <div className="mb-8 flex items-center gap-3 border-b border-white/[0.06] pb-5">
                 <motion.span
@@ -506,260 +454,16 @@ const Contact = () => {
             </motion.div>
 
             {/* =================================================
-                FORM — MAIN FOCUS
+                RIGHT SIDE — CONTACT FORM
             ================================================= */}
 
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 30,
-                scale: 0.98,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-                scale: 1,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.2,
-              }}
-              transition={{
-                duration: 0.8,
-                delay: 0.08,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              style={{
-                rotateX,
-                rotateY,
-                transformPerspective: 1000,
-              }}
-              onMouseMove={handleFormMove}
-              onMouseLeave={resetFormMotion}
-              className="
-                group
-                relative
-                overflow-hidden
-                border
-                border-[#9CFF00]/20
-                bg-[#050805]
-                p-5
-                shadow-[0_20px_70px_rgba(0,0,0,0.25)]
-                sm:p-6
-                md:p-7
-              "
-            >
-              {/* =================================================
-                  FORM GLOW BORDER
-              ================================================= */}
+            <ContactForm
+              rotateX={rotateX}
+              rotateY={rotateY}
+              handleFormMove={handleFormMove}
+              resetFormMotion={resetFormMotion}
+            />
 
-              <motion.div
-                initial={{
-                  scaleX: 0,
-                  opacity: 0,
-                }}
-                whileInView={{
-                  scaleX: 1,
-                  opacity: 1,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 1,
-                  delay: 0.3,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="
-                  absolute
-                  left-0
-                  right-0
-                  top-0
-                  h-px
-                  origin-left
-                  bg-gradient-to-r
-                  from-transparent
-                  via-[#9CFF00]
-                  to-transparent
-                  shadow-[0_0_15px_#9CFF00]
-                "
-              />
-
-              {/* Corner HUD */}
-              <div className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l border-t border-[#9CFF00]/50" />
-
-              <div className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r border-t border-[#9CFF00]/50" />
-
-              <div className="pointer-events-none absolute bottom-3 left-3 h-6 w-6 border-b border-l border-[#9CFF00]/30" />
-
-              <div className="pointer-events-none absolute bottom-3 right-3 h-6 w-6 border-b border-r border-[#9CFF00]/30" />
-
-              {/* Form header */}
-              <div className="relative z-10 mb-6 flex items-center justify-between border-b border-white/[0.06] pb-4">
-                <div className="flex items-center gap-3">
-                  <motion.span
-                    animate={{
-                      opacity: [1, 0.35, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                    }}
-                    className="
-                      h-1.5
-                      w-1.5
-                      rounded-full
-                      bg-[#9CFF00]
-                      shadow-[0_0_8px_#9CFF00]
-                    "
-                  />
-
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
-                    Send a message
-                  </p>
-                </div>
-
-                <span className="text-[8px] font-bold tracking-widest text-gray-700">
-                  04 / 04
-                </span>
-              </div>
-
-              {/* =================================================
-                  FORM
-              ================================================= */}
-
-              <form className="relative z-10 space-y-5">
-
-                {/* Name + Email */}
-                <div className="grid gap-5 md:grid-cols-2">
-                  <FormField
-                    label="Your Name"
-                    id="name"
-                    placeholder="John Doe"
-                    delay={0.25}
-                  />
-
-                  <FormField
-                    label="Email Address"
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    delay={0.32}
-                  />
-                </div>
-
-                {/* Subject */}
-                <FormField
-                  label="Subject"
-                  id="subject"
-                  placeholder="Let's build something awesome"
-                  delay={0.39}
-                />
-
-                {/* Message */}
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 12,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    delay: 0.46,
-                    duration: 0.45,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block text-[8px] font-bold uppercase tracking-[0.2em] text-gray-600"
-                  >
-                    Message
-                  </label>
-
-                  <textarea
-                    id="message"
-                    rows="5"
-                    placeholder="Tell me about your project..."
-                    className="
-                      w-full
-                      resize-none
-                      border
-                      border-white/[0.08]
-                      bg-[#020502]
-                      px-3
-                      py-3
-                      text-xs
-                      text-white
-                      outline-none
-                      transition-all
-                      duration-300
-                      placeholder:text-gray-700
-                      hover:border-white/[0.14]
-                      focus:border-[#9CFF00]/60
-                      focus:bg-[#071007]
-                      focus:shadow-[0_0_25px_rgba(156,255,0,0.06)]
-                    "
-                  />
-                </motion.div>
-
-                {/* Submit */}
-                <motion.button
-                  type="submit"
-                  initial={{
-                    opacity: 0,
-                    y: 10,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    delay: 0.53,
-                    duration: 0.4,
-                  }}
-                  whileHover={{
-                    y: -2,
-                    boxShadow:
-                      "0 10px 35px rgba(156,255,0,0.22)",
-                  }}
-                  whileTap={{
-                    scale: 0.985,
-                  }}
-                  className="
-                    group
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    gap-3
-                    bg-[#9CFF00]
-                    px-5
-                    py-3.5
-                    text-[9px]
-                    font-black
-                    uppercase
-                    tracking-[0.15em]
-                    text-black
-                  "
-                >
-                  Send Message
-
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </motion.button>
-              </form>
-            </motion.div>
           </div>
 
           {/* =================================================
@@ -792,7 +496,6 @@ const Contact = () => {
               border-t
               border-white/[0.06]
               pt-5
-
               md:flex-row
               md:items-center
             "
@@ -808,15 +511,21 @@ const Contact = () => {
             </div>
 
             <a
-              href="mailto:your@email.com"
-              className="text-xs font-bold text-gray-500 transition-colors hover:text-[#9CFF00]"
+              href="mailto:kk761734@gmail.com"
+              className="
+                text-xs
+                font-bold
+                text-gray-500
+                transition-colors
+                hover:text-[#9CFF00]
+              "
             >
               Prefer email? Let's talk ↗
             </a>
           </motion.div>
+
         </div>
       </section>
-
     </>
   );
 };
