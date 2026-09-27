@@ -4,7 +4,7 @@ const ProtectedAdminRoute = () => {
   const isLoggedIn = sessionStorage.getItem("adminLoggedIn");
 
   if (!isLoggedIn) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/auth/login" replace />;
   }
 
   return <Outlet />;
