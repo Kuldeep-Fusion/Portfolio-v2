@@ -14,7 +14,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "https://kuldeep-zeta.vercel.app",
-  "http://localhost:5174",
+  "https://admincms-one.vercel.app",
 ];
 
 app.use(
