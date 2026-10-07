@@ -315,7 +315,7 @@ const ProjectForm = ({ project, setProject }) => {
 
       <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             01 / Information
           </p>
 
@@ -408,7 +408,7 @@ const ProjectForm = ({ project, setProject }) => {
 
       <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             02 / Stack
           </p>
 
@@ -469,7 +469,7 @@ const ProjectForm = ({ project, setProject }) => {
 
       <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             03 / Links
           </p>
 
@@ -537,7 +537,7 @@ const ProjectForm = ({ project, setProject }) => {
 
       <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             04 / Media
           </p>
 
@@ -601,7 +601,7 @@ const ProjectForm = ({ project, setProject }) => {
 
       <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             05 / Settings
           </p>
 

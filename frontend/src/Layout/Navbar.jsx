@@ -6,7 +6,7 @@ import { useState } from "react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = ["About", "Skills", "Experience","Projects", "Contact"];
+  const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
 
   return (
     <nav className="relative mx-auto mt-5 w-[calc(100%-2rem)] max-w-7xl overflow-hidden rounded-lg border border-lime-400/30 bg-[#080c08]/95 px-5 py-4 text-white shadow-[0_0_30px_rgba(132,255,0,0.08),inset_0_0_30px_rgba(132,255,0,0.025)] backdrop-blur-xl md:px-6">

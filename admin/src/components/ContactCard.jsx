@@ -1,4 +1,3 @@
-
 import {
   CheckCheckIcon,
   Eye,
@@ -57,11 +56,11 @@ const ContactCard = () => {
   if (loading) {
     return (
       <section className="w-full">
-        <div className="flex min-h-[300px] items-center justify-center">
+        <div className="flex min-h-[400px] items-center justify-center">
           <div className="text-center">
-            <div className="mx-auto h-6 w-6 animate-spin rounded-full border-2 border-white/10 border-t-[#9CFF00]" />
+            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-[#9CFF00]" />
 
-            <p className="mt-4 text-[8px] font-bold uppercase tracking-[0.25em] text-gray-600">
+            <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-gray-500">
               Loading Messages
             </p>
           </div>
@@ -77,9 +76,9 @@ const ContactCard = () => {
   if (error) {
     return (
       <section className="w-full">
-        <div className="flex min-h-[300px] items-center justify-center border border-red-500/10 bg-red-500/[0.02]">
+        <div className="flex min-h-[400px] items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/[0.05]">
           <div className="text-center">
-            <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-red-400">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-400">
               {error}
             </p>
 
@@ -87,18 +86,21 @@ const ContactCard = () => {
               type="button"
               onClick={fetchContacts}
               className="
-                mt-4
+                mt-6
+                rounded-lg
                 border
                 border-white/10
-                px-4
-                py-2
-                text-[7px]
+                bg-white/5
+                px-6
+                py-3
+                text-xs
                 font-bold
                 uppercase
                 tracking-[0.2em]
-                text-gray-400
+                text-gray-300
                 transition
-                hover:border-[#9CFF00]/30
+                hover:border-[#9CFF00]/40
+                hover:bg-[#9CFF00]/10
                 hover:text-[#9CFF00]
               "
             >
@@ -116,20 +118,20 @@ const ContactCard = () => {
           HEADER
       ===================================== */}
 
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="mb-2 text-[8px] font-bold uppercase tracking-[0.3em] text-[#9CFF00]">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#9CFF00]">
             Communication
           </p>
 
-          <h1 className="text-2xl font-black uppercase tracking-[-0.04em] text-white sm:text-3xl">
+          <h1 className="text-3xl font-black uppercase tracking-[-0.04em] text-white sm:text-4xl">
             Contact Messages
-            <span className="text-[#9CFF00]">
+            <span className="text-[#9CFF00] drop-shadow-[0_0_10px_#9CFF00]">
               .
             </span>
           </h1>
 
-          <p className="mt-2 text-xs text-gray-600">
+          <p className="mt-3 text-sm text-gray-400">
             Manage messages received from your
             portfolio website.
           </p>
@@ -137,12 +139,12 @@ const ContactCard = () => {
 
         {/* Total Messages */}
 
-        <div className="border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-          <p className="text-[7px] font-bold uppercase tracking-[0.2em] text-gray-600">
+        <div className="rounded-xl border border-[#9CFF00]/20 bg-[#9CFF00]/10 px-5 py-4 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]/80">
             Total Messages
           </p>
 
-          <p className="mt-1 text-lg font-black text-[#9CFF00]">
+          <p className="mt-1 text-2xl font-black text-[#9CFF00]">
             {contacts.length}
           </p>
         </div>
@@ -153,13 +155,13 @@ const ContactCard = () => {
       ===================================== */}
 
       {contacts.length === 0 ? (
-        <div className="flex min-h-[300px] items-center justify-center border border-dashed border-white/[0.08]">
+        <div className="flex min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-white/[0.1]">
           <div className="text-center">
-            <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-gray-600">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-gray-500">
               No Messages Found
             </p>
 
-            <p className="mt-2 text-[8px] text-gray-700">
+            <p className="mt-2 text-xs text-gray-600">
               Contact messages will appear here.
             </p>
           </div>
@@ -169,10 +171,10 @@ const ContactCard = () => {
            TABLE
         ===================================== */
 
-        <div className="overflow-hidden border border-white/[0.06] bg-[#050805]">
+        <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#050805] shadow-xl">
           {/* Table Header */}
 
-          <div className="hidden border-b border-white/[0.06] bg-white/[0.02] lg:grid lg:grid-cols-[1.5fr_1.5fr_1fr_1.4fr_1fr_0.8fr_100px]">
+          <div className="hidden border-b border-white/[0.08] bg-white/[0.03] lg:grid lg:grid-cols-[1.5fr_1.5fr_1fr_1.4fr_1fr_0.8fr_120px]">
             <TableHeading>
               Name
             </TableHeading>
@@ -224,7 +226,7 @@ const ContactCard = () => {
 
 const TableHeading = ({ children }) => {
   return (
-    <div className="px-4 py-3 text-[7px] font-bold uppercase tracking-[0.2em] text-gray-600">
+    <div className="px-5 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
       {children}
     </div>
   );
@@ -246,12 +248,12 @@ const ContactRow = ({ contact }) => {
       className="
         group
         grid
-        gap-4
-        p-4
+        gap-5
+        p-5
         transition-all
         duration-300
-        hover:bg-[#9CFF00]/[0.025]
-        lg:grid-cols-[1.5fr_1.5fr_1fr_1.4fr_1fr_0.8fr_100px]
+        hover:bg-[#9CFF00]/[0.03]
+        lg:grid-cols-[1.5fr_1.5fr_1fr_1.4fr_1fr_0.8fr_120px]
         lg:items-center
         lg:gap-0
         lg:p-0
@@ -259,10 +261,10 @@ const ContactRow = ({ contact }) => {
     >
       {/* Name */}
 
-      <div className="lg:px-4 lg:py-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#9CFF00]/20 bg-[#9CFF00]/[0.04]">
-            <span className="text-[10px] font-black text-[#9CFF00]">
+      <div className="lg:px-5 lg:py-5">
+        <div className="flex items-center gap-4">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#9CFF00]/20 bg-[#9CFF00]/10 transition-transform group-hover:scale-110">
+            <span className="text-sm font-black text-[#9CFF00]">
               {contact.name
                 ?.charAt(0)
                 ?.toUpperCase()}
@@ -270,11 +272,11 @@ const ContactRow = ({ contact }) => {
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-[10px] font-bold uppercase tracking-wide text-white">
+            <p className="truncate text-xs font-bold uppercase tracking-wide text-gray-200 transition group-hover:text-white">
               {contact.name}
             </p>
 
-            <p className="mt-1 text-[7px] uppercase tracking-[0.15em] text-gray-700">
+            <p className="mt-1 text-[9px] uppercase tracking-[0.15em] text-gray-600">
               ID #
               {String(contactId).slice(-6)}
             </p>
@@ -284,15 +286,15 @@ const ContactRow = ({ contact }) => {
 
       {/* Email */}
 
-      <div className="flex items-center gap-2 lg:px-4 lg:py-4">
+      <div className="flex items-center gap-3 lg:px-5 lg:py-5">
         <Mail
-          size={13}
-          className="shrink-0 text-gray-700"
+          size={16}
+          className="shrink-0 text-gray-600"
         />
 
         <a
           href={`mailto:${contact.email}`}
-          className="truncate text-[9px] text-gray-500 transition hover:text-[#9CFF00]"
+          className="truncate text-xs text-gray-400 transition hover:text-[#9CFF00]"
         >
           {contact.email}
         </a>
@@ -300,15 +302,15 @@ const ContactRow = ({ contact }) => {
 
       {/* Phone */}
 
-      <div className="flex items-center gap-2 lg:px-4 lg:py-4">
+      <div className="flex items-center gap-3 lg:px-5 lg:py-5">
         <Phone
-          size={13}
-          className="shrink-0 text-gray-700"
+          size={16}
+          className="shrink-0 text-gray-600"
         />
 
         <a
           href={`tel:${contact.phone}`}
-          className="text-[9px] text-gray-500 transition hover:text-[#9CFF00]"
+          className="text-xs text-gray-400 transition hover:text-[#9CFF00]"
         >
           {contact.phone}
         </a>
@@ -316,16 +318,16 @@ const ContactRow = ({ contact }) => {
 
       {/* Subject */}
 
-      <div className="lg:px-4 lg:py-4">
-        <p className="text-[9px] font-medium text-gray-400">
+      <div className="lg:px-5 lg:py-5">
+        <p className="text-xs font-medium text-gray-400">
           {contact.subject}
         </p>
       </div>
 
       {/* Date */}
 
-      <div className="lg:px-4 lg:py-4">
-        <p className="text-[8px] uppercase tracking-wide text-gray-600">
+      <div className="lg:px-5 lg:py-5">
+        <p className="text-xs uppercase tracking-wide text-gray-500">
           {contact.createdAt
             ? new Date(
                 contact.createdAt
@@ -340,28 +342,29 @@ const ContactRow = ({ contact }) => {
 
       {/* Status */}
 
-      <div className="lg:px-4 lg:py-4">
+      <div className="lg:px-5 lg:py-5">
         <span
           className={`
             inline-flex
             items-center
-            gap-1.5
+            gap-2
+            rounded-full
             border
-            px-2
-            py-1
-            text-[7px]
+            px-3
+            py-1.5
+            text-[9px]
             font-bold
             uppercase
             tracking-[0.15em]
             ${
               status === "New"
-                ? "border-[#9CFF00]/20 bg-[#9CFF00]/[0.05] text-[#9CFF00]"
-                : "border-white/[0.08] bg-white/[0.02] text-gray-600"
+                ? "border-[#9CFF00]/30 bg-[#9CFF00]/10 text-[#9CFF00]"
+                : "border-white/10 bg-white/5 text-gray-400"
             }
           `}
         >
           {status === "New" && (
-            <span className="h-1 w-1 rounded-full bg-[#9CFF00]" />
+            <span className="h-2 w-2 rounded-full bg-[#9CFF00]" />
           )}
 
           {status}
@@ -370,7 +373,7 @@ const ContactRow = ({ contact }) => {
 
       {/* Actions */}
 
-      <div className="flex items-center gap-1 lg:px-4 lg:py-4">
+      <div className="flex items-center gap-2 lg:px-5 lg:py-5">
         {/* View */}
 
         <button
@@ -378,20 +381,23 @@ const ContactRow = ({ contact }) => {
           title="View message"
           className="
             flex
-            h-8
-            w-8
+            h-10
+            w-10
             items-center
             justify-center
+            rounded-lg
             border
-            border-white/[0.06]
-            text-gray-600
+            border-white/10
+            bg-white/5
+            text-gray-400
             transition-all
-            hover:border-[#9CFF00]/30
-            hover:bg-[#9CFF00]/[0.04]
+            hover:border-[#9CFF00]/40
+            hover:bg-[#9CFF00]/10
             hover:text-[#9CFF00]
+            hover:scale-[1.05]
           "
         >
-          <Eye size={13} />
+          <Eye size={16} />
         </button>
 
         {/* Mark as read */}
@@ -401,20 +407,23 @@ const ContactRow = ({ contact }) => {
           title="Mark as read"
           className="
             flex
-            h-8
-            w-8
+            h-10
+            w-10
             items-center
             justify-center
+            rounded-lg
             border
-            border-white/[0.06]
-            text-gray-600
+            border-white/10
+            bg-white/5
+            text-gray-400
             transition-all
-            hover:border-[#9CFF00]/30
-            hover:bg-[#9CFF00]/[0.04]
+            hover:border-[#9CFF00]/40
+            hover:bg-[#9CFF00]/10
             hover:text-[#9CFF00]
+            hover:scale-[1.05]
           "
         >
-          <CheckCheckIcon size={13} />
+          <CheckCheckIcon size={16} />
         </button>
 
         {/* Delete */}
@@ -424,20 +433,23 @@ const ContactRow = ({ contact }) => {
           title="Delete"
           className="
             flex
-            h-8
-            w-8
+            h-10
+            w-10
             items-center
             justify-center
+            rounded-lg
             border
-            border-white/[0.06]
-            text-gray-600
+            border-white/10
+            bg-white/5
+            text-gray-400
             transition-all
-            hover:border-red-500/30
-            hover:bg-red-500/[0.04]
+            hover:border-red-500/40
+            hover:bg-red-500/10
             hover:text-red-400
+            hover:scale-[1.05]
           "
         >
-          <Trash2 size={13} />
+          <Trash2 size={16} />
         </button>
       </div>
     </div>
@@ -445,4 +457,3 @@ const ContactRow = ({ contact }) => {
 };
 
 export default ContactCard;
-

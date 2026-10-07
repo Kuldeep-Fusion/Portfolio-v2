@@ -17,13 +17,16 @@ const ProjectCard = ({
       className="
         group
         overflow-hidden
+        rounded-2xl
         border
         border-white/[0.08]
         bg-[#0b100b]
+        shadow-lg
         transition-all
         duration-300
-        hover:border-[#9CFF00]/25
+        hover:border-[#9CFF00]/40
         hover:bg-[#0d130d]
+        hover:shadow-[0_10px_30px_rgba(156,255,0,0.1)]
       "
     >
       {/* ================= IMAGE ================= */}
@@ -39,24 +42,27 @@ const ProjectCard = ({
             opacity-80
             transition-transform
             duration-500
-            group-hover:scale-105
+            group-hover:scale-110
           "
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050805] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050805] via-[#050805]/20 to-transparent" />
 
         {/* Project Number */}
 
         <span
           className="
             absolute
-            left-4
-            top-4
-            text-5xl
+            left-5
+            top-5
+            text-6xl
             font-black
             leading-none
             tracking-[-0.08em]
-            text-white/[0.08]
+            text-white/[0.15]
+            transition-all
+            duration-300
+            group-hover:text-white/[0.25]
           "
         >
           {String(index + 1).padStart(2, "0")}
@@ -72,22 +78,23 @@ const ProjectCard = ({
               top-4
               flex
               items-center
-              gap-1.5
+              gap-2
+              rounded-full
               border
-              border-[#9CFF00]/25
-              bg-[#050805]/85
-              px-2.5
+              border-[#9CFF00]/30
+              bg-[#050805]/90
+              px-3
               py-1.5
               backdrop-blur-md
             "
           >
             <StarIcon
-              size={12}
+              size={14}
               duration={0.4}
               className="text-[#9CFF00]"
             />
 
-            <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-[#9CFF00]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#9CFF00]">
               Featured
             </span>
           </div>
@@ -102,15 +109,16 @@ const ProjectCard = ({
             left-4
             max-w-[70%]
             truncate
+            rounded-md
             border
-            border-white/[0.10]
-            bg-black/60
-            px-2.5
+            border-white/[0.15]
+            bg-black/70
+            px-3
             py-1.5
             backdrop-blur-md
           "
         >
-          <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-gray-400">
+          <span className="text-xs font-bold uppercase tracking-[0.15em] text-gray-300">
             /{project.slug}
           </span>
         </div>
@@ -118,16 +126,16 @@ const ProjectCard = ({
 
       {/* ================= CONTENT ================= */}
 
-      <div className="p-4 sm:p-5">
+      <div className="p-5 sm:p-6">
         {/* Title + Edit */}
 
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="mb-1 text-[7px] font-bold uppercase tracking-[0.25em] text-[#9CFF00]">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9CFF00]">
               Project {String(index + 1).padStart(2, "0")}
             </p>
 
-            <h3 className="text-base font-black uppercase tracking-[-0.02em] text-white sm:text-lg">
+            <h3 className="text-xl font-black uppercase tracking-tight text-white sm:text-2xl">
               {project.title}
             </h3>
           </div>
@@ -139,23 +147,25 @@ const ProjectCard = ({
             onClick={() => onEdit?.(project)}
             className="
               flex
-              h-8
-              w-8
+              h-10
+              w-10
               shrink-0
               items-center
               justify-center
+              rounded-lg
               border
-              border-white/[0.08]
-              text-gray-600
+              border-white/[0.1]
+              bg-white/5
+              text-gray-400
               transition-all
               duration-300
-              hover:border-[#9CFF00]/30
-              hover:bg-[#9CFF00]/[0.04]
+              hover:border-[#9CFF00]/40
+              hover:bg-[#9CFF00]/10
               hover:text-[#9CFF00]
             "
           >
             <PencilIcon
-              size={13}
+              size={18}
               duration={0.4}
             />
           </button>
@@ -164,34 +174,38 @@ const ProjectCard = ({
         {/* Tagline */}
 
         {project.tagline && (
-          <p className="mt-2 text-[9px] font-medium leading-5 text-[#9CFF00]/70">
+          <p className="mt-3 text-sm font-medium leading-relaxed text-[#9CFF00]/80">
             {project.tagline}
           </p>
         )}
 
         {/* Description */}
 
-        <p className="mt-2 line-clamp-3 text-[10px] leading-5 text-gray-500">
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-gray-400">
           {project.description}
         </p>
 
         {/* Technologies */}
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        <div className="mt-5 flex flex-wrap gap-2">
           {project.technologies?.map((technology) => (
             <span
               key={technology}
               className="
+                rounded-md
                 border
-                border-white/[0.07]
-                bg-white/[0.02]
-                px-2
-                py-1
-                text-[7px]
+                border-white/[0.1]
+                bg-white/[0.04]
+                px-3
+                py-1.5
+                text-[10px]
                 font-bold
                 uppercase
                 tracking-wider
-                text-gray-500
+                text-gray-400
+                transition-colors
+                group-hover:border-[#9CFF00]/20
+                group-hover:text-[#9CFF00]/80
               "
             >
               {technology}
@@ -201,30 +215,30 @@ const ProjectCard = ({
 
         {/* Divider */}
 
-        <div className="my-4 h-px bg-white/[0.06]" />
+        <div className="my-5 h-px bg-white/[0.08]" />
 
         {/* ================= META ================= */}
 
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-5 flex items-center justify-between">
           <div>
-            <p className="text-[6px] font-bold uppercase tracking-[0.2em] text-gray-700">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
               Order
             </p>
 
-            <p className="mt-1 text-[9px] font-bold text-gray-400">
+            <p className="mt-1 text-sm font-bold text-gray-300">
               #{project.order}
             </p>
           </div>
 
           <div>
-            <p className="text-[6px] font-bold uppercase tracking-[0.2em] text-gray-700">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
               Status
             </p>
 
-            <div className="mt-1 flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
+            <div className="mt-1 flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
 
-              <span className="text-[8px] font-bold uppercase tracking-wider text-[#9CFF00]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#9CFF00]">
                 Published
               </span>
             </div>
@@ -233,7 +247,7 @@ const ProjectCard = ({
 
         {/* ================= ACTIONS ================= */}
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Live */}
 
           {project.links?.live && (
@@ -243,25 +257,27 @@ const ProjectCard = ({
               rel="noreferrer"
               className="
                 flex
-                min-h-[34px]
+                h-11
                 flex-1
                 items-center
                 justify-center
                 gap-2
+                rounded-lg
                 bg-[#9CFF00]
-                px-3
-                text-[7px]
+                px-4
+                text-xs
                 font-black
                 uppercase
                 tracking-[0.15em]
                 text-black
                 transition-all
                 duration-300
-                hover:shadow-[0_0_20px_rgba(156,255,0,0.25)]
+                hover:shadow-[0_0_20px_rgba(156,255,0,0.3)]
+                hover:scale-[1.02]
               "
             >
               <ExternalLinkIcon
-                size={12}
+                size={16}
                 duration={0.4}
               />
               Live
@@ -277,27 +293,31 @@ const ProjectCard = ({
               rel="noreferrer"
               className="
                 flex
-                min-h-[34px]
+                h-11
                 flex-1
                 items-center
                 justify-center
                 gap-2
+                rounded-lg
                 border
-                border-white/[0.08]
-                px-3
-                text-[7px]
+                border-white/[0.1]
+                bg-white/5
+                px-4
+                text-xs
                 font-black
                 uppercase
                 tracking-[0.15em]
-                text-gray-500
+                text-gray-400
                 transition-all
                 duration-300
-                hover:border-[#9CFF00]/30
+                hover:border-[#9CFF00]/40
+                hover:bg-[#9CFF00]/10
                 hover:text-[#9CFF00]
+                hover:scale-[1.02]
               "
             >
               <GithubIcon
-                size={12}
+                size={16}
                 duration={0.4}
               />
               GitHub
@@ -311,23 +331,26 @@ const ProjectCard = ({
             onClick={() => handleDelete?.(project._id)}
             className="
               flex
-              h-[34px]
-              w-[34px]
+              h-11
+              w-11
               shrink-0
               items-center
               justify-center
+              rounded-lg
               border
-              border-white/[0.08]
-              text-gray-600
+              border-white/[0.1]
+              bg-white/5
+              text-gray-400
               transition-all
               duration-300
-              hover:border-red-500/30
-              hover:bg-red-500/[0.04]
+              hover:border-red-500/40
+              hover:bg-red-500/10
               hover:text-red-400
+              hover:scale-[1.05]
             "
           >
             <Trash2Icon
-              size={13}
+              size={18}
               duration={0.4}
             />
           </button>

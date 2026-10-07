@@ -1,7 +1,7 @@
-import ConnectDB from '../lib/db.js' 
+import ConnectDB from '../lib/db.js'
 import express from 'express'
 import ContactRoute from '../routes/contact.route.js';
-import ProjectRouter from'../routes/prjoect.route.js';
+import ProjectRouter from '../routes/prjoect.route.js';
 import UserRouter from '../routes/user.route.js'
 import cors from 'cors'
 
@@ -14,7 +14,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "https://kuldeep-zeta.vercel.app",
-  "https://admincms-one.vercel.app",
+  "http://localhost:5174",
 ];
 
 app.use(

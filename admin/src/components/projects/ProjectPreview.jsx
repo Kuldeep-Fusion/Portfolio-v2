@@ -17,7 +17,7 @@ const ProjectPreview = ({ project }) => {
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
 
         <div>
-          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
             Live Preview
           </p>
 
@@ -31,7 +31,7 @@ const ProjectPreview = ({ project }) => {
 
           <span className="h-1.5 w-1.5 rounded-full bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
 
-          <span className="text-[8px] font-bold uppercase tracking-wider text-[#9CFF00]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#9CFF00]">
             Preview
           </span>
 
@@ -71,7 +71,7 @@ const ProjectPreview = ({ project }) => {
                     </span>
                   </div>
 
-                  <p className="text-[9px] uppercase tracking-[0.15em] text-gray-600">
+                  <p className="text-xs uppercase tracking-[0.15em] text-gray-600">
                     Project Image
                   </p>
 
@@ -89,7 +89,7 @@ const ProjectPreview = ({ project }) => {
                   className="text-[#9CFF00]"
                 />
 
-                <span className="text-[8px] font-bold uppercase tracking-wider text-[#9CFF00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#9CFF00]">
                   Featured
                 </span>
 
@@ -103,7 +103,7 @@ const ProjectPreview = ({ project }) => {
 
             {/* Slug */}
             {project.slug && (
-              <p className="text-[8px] font-medium uppercase tracking-[0.18em] text-[#9CFF00]/60">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#9CFF00]/60">
                 /{project.slug}
               </p>
             )}
@@ -138,7 +138,7 @@ const ProjectPreview = ({ project }) => {
                   </span>
                 ))
               ) : (
-                <span className="text-[9px] text-gray-700">
+                <span className="text-xs text-gray-700">
                   Technologies
                 </span>
               )}
@@ -150,7 +150,7 @@ const ProjectPreview = ({ project }) => {
 
               {/* Order */}
               <div>
-                <p className="text-[7px] uppercase tracking-wider text-gray-700">
+                <p className="text-xs uppercase tracking-wider text-gray-700">
                   Order
                 </p>
 
@@ -202,11 +202,11 @@ const ProjectPreview = ({ project }) => {
 
         <div className="flex items-center justify-between">
 
-          <span className="text-[8px] font-bold uppercase tracking-[0.15em] text-gray-600">
+          <span className="text-xs font-bold uppercase tracking-[0.15em] text-gray-600">
             Form Status
           </span>
 
-          <span className="text-[8px] font-bold uppercase tracking-[0.15em] text-[#9CFF00]">
+          <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#9CFF00]">
             Live
           </span>
 

@@ -102,17 +102,17 @@ const Sidebar = () => {
           className="flex items-center gap-3"
         >
           {/* Logo Box */}
-          <div className="flex h-8 w-8 items-center justify-center border border-[#9CFF00]/30 bg-[#9CFF00]/[0.06]">
-            <span className="text-xs font-black text-[#9CFF00]">KF</span>
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#9CFF00]/30 bg-[#9CFF00]/[0.06]">
+            <span className="text-base font-black text-[#9CFF00]">KF</span>
           </div>
 
           {/* Logo Text */}
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.15em] text-white">
+            <p className="text-xs font-black uppercase tracking-[0.15em] text-white">
               Admin
             </p>
 
-            <p className="text-[7px] uppercase tracking-[0.25em] text-gray-600">
+            <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400">
               Control Panel
             </p>
           </div>
@@ -122,9 +122,9 @@ const Sidebar = () => {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="flex h-9 w-9 items-center justify-center border border-white/10 text-gray-400 transition hover:border-[#9CFF00]/30 hover:text-[#9CFF00]"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-[#9CFF00]/30 hover:text-[#9CFF00]"
         >
-          <Menu size={17} />
+          <Menu size={20} />
         </button>
       </header>
 
@@ -185,31 +185,31 @@ const Sidebar = () => {
             LOGO
         =================================================== */}
 
-        <div className="relative z-10 flex h-20 items-center justify-between border-b border-white/[0.06] px-5">
+        <div className="relative z-10 flex h-24 items-center justify-between border-b border-white/[0.06] px-6">
           {/* Logo */}
           <NavLink
             to="/"
             onClick={closeSidebar}
-            className="flex items-center gap-3"
+            className="flex items-center gap-4"
           >
             {/* Logo Box */}
-            <div className="relative flex h-10 w-10 items-center justify-center border border-[#9CFF00]/30 bg-[#9CFF00]/[0.05]">
-              <span className="text-sm font-black tracking-[-0.05em] text-[#9CFF00]">
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#9CFF00]/30 bg-[#9CFF00]/[0.05] shadow-[0_0_15px_rgba(156,255,0,0.1)]">
+              <span className="text-lg font-black tracking-[-0.05em] text-[#9CFF00]">
                 KF
               </span>
 
               {/* Status Dot */}
-              <span className="absolute -right-[2px] -top-[2px] h-1.5 w-1.5 bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
+              <span className="absolute -right-[2px] -top-[2px] h-2 w-2 rounded-full bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
             </div>
 
             {/* Brand */}
             <div>
-              <h2 className="text-[11px] font-black uppercase tracking-[0.15em] text-white">
+              <h2 className="text-sm font-black uppercase tracking-[0.15em] text-white">
                 Kuldeep
                 <span className="text-[#9CFF00]">.</span>
               </h2>
 
-              <p className="mt-1 text-[7px] font-bold uppercase tracking-[0.25em] text-gray-600">
+              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">
                 Admin System
               </p>
             </div>
@@ -219,9 +219,9 @@ const Sidebar = () => {
           <button
             type="button"
             onClick={closeSidebar}
-            className="flex h-8 w-8 items-center justify-center border border-white/10 text-gray-500 transition hover:border-[#9CFF00]/30 hover:text-[#9CFF00] lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-500 transition hover:border-[#9CFF00]/30 hover:text-[#9CFF00] lg:hidden"
           >
-            <X size={15} />
+            <X size={18} />
           </button>
         </div>
 
@@ -229,23 +229,23 @@ const Sidebar = () => {
             STATUS
         =================================================== */}
 
-        <div className="relative z-10 px-4 pt-5">
-          <div className="flex items-center justify-between border border-white/[0.06] bg-white/[0.02] px-3 py-2.5">
+        <div className="relative z-10 px-5 pt-6">
+          <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3 shadow-sm backdrop-blur-sm">
             {/* System */}
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#9CFF00] opacity-30" />
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#9CFF00] opacity-40" />
 
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#9CFF00]" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#9CFF00]" />
               </span>
 
-              <span className="text-[7px] font-bold uppercase tracking-[0.2em] text-gray-500">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
                 System
               </span>
             </div>
 
             {/* Online */}
-            <span className="text-[7px] font-black uppercase tracking-[0.2em] text-[#9CFF00]">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#9CFF00]">
               Online
             </span>
           </div>
@@ -255,13 +255,13 @@ const Sidebar = () => {
             NAVIGATION
         =================================================== */}
 
-        <nav className="relative z-10 flex-1 overflow-y-auto px-4 py-6">
+        <nav className="relative z-10 flex-1 overflow-y-auto px-5 py-6">
           {/* Navigation Title */}
-          <p className="mb-3 px-3 text-[7px] font-bold uppercase tracking-[0.3em] text-gray-700">
+          <p className="mb-4 px-3 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-600">
             Navigation
           </p>
 
-          <div className="space-y-1">
+          <div className="space-y-2">
             {navItems.map((item, index) => {
               const Icon = item.icon;
 
@@ -288,47 +288,43 @@ const Sidebar = () => {
                       type="button"
                       onClick={() => toggleMenu(item.name)}
                       className={`
-                        group relative flex h-11 w-full
+                        group relative flex h-12 w-full
                         items-center gap-3
-                        border px-3
+                        rounded-lg px-4
                         transition-all duration-300
 
                         ${submenuActive
-                          ? "border-[#9CFF00]/20 bg-[#9CFF00]/[0.06] text-[#9CFF00]"
-                          : "border-transparent text-gray-500 hover:border-white/[0.05] hover:bg-white/[0.02] hover:text-white"
+                          ? "bg-[#9CFF00]/10 text-[#9CFF00] border border-[#9CFF00]/20 shadow-[0_0_10px_rgba(156,255,0,0.05)]"
+                          : "border border-transparent text-gray-400 hover:border-white/[0.05] hover:bg-white/[0.03] hover:text-white"
                         }
                       `}
                     >
                       {/* Active Line */}
                       {submenuActive && (
-                        <span className="absolute bottom-2 left-0 top-2 w-[2px] bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
+                        <span className="absolute bottom-3 left-0 top-3 w-[3px] rounded-r-md bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
                       )}
 
                       {/* Number */}
                       <span
                         className={`
-                          w-4 text-[7px] font-bold
-
-                          ${submenuActive
-                            ? "text-[#9CFF00]/60"
-                            : "text-gray-800"
-                          }
+                          w-5 text-[10px] font-bold
+                          ${submenuActive ? "text-[#9CFF00]/60" : "text-gray-600"}
                         `}
                       >
                         0{index + 1}
                       </span>
 
                       {/* Icon */}
-                      <Icon size={17} duration={0.5} color="currentColor" />
+                      <Icon size={18} duration={0.5} color="currentColor" />
 
                       {/* Name */}
-                      <span className="text-[9px] font-bold uppercase tracking-[0.15em]">
+                      <span className="text-xs font-bold uppercase tracking-[0.15em]">
                         {item.name}
                       </span>
 
                       {/* Arrow */}
                       <ChevronDownIcon
-                        size={14}
+                        size={16}
                         className={`
                           ml-auto transition-transform duration-300
 
@@ -352,7 +348,7 @@ const Sidebar = () => {
                       `}
                     >
                       <div className="overflow-hidden">
-                        <div className="ml-7 mt-1 space-y-1 border-l border-white/[0.06] pl-3">
+                        <div className="ml-8 mt-2 space-y-1.5 border-l-2 border-white/[0.06] pl-4">
                           {item.submenu.map((subItem) => (
                             <NavLink
                               key={subItem.path}
@@ -360,17 +356,17 @@ const Sidebar = () => {
                               onClick={closeSidebar}
                               className={({ isActive }) =>
                                 `
-                                  relative flex h-9
-                                  items-center px-3
+                                  relative flex h-10
+                                  items-center px-4 rounded-md
 
-                                  text-[8px] font-bold
+                                  text-[10px] font-bold
                                   uppercase tracking-[0.12em]
 
                                   transition-all duration-200
 
                                   ${isActive
-                                  ? "bg-[#9CFF00]/[0.06] text-[#9CFF00]"
-                                  : "text-gray-600 hover:bg-white/[0.02] hover:text-gray-300"
+                                  ? "bg-[#9CFF00]/10 text-[#9CFF00] shadow-sm"
+                                  : "text-gray-500 hover:bg-white/[0.02] hover:text-gray-300"
                                 }
                                 `
                               }
@@ -379,7 +375,7 @@ const Sidebar = () => {
                                 <>
                                   {/* Active Line */}
                                   {isActive && (
-                                    <span className="absolute -left-[1px] h-4 w-[2px] bg-[#9CFF00] shadow-[0_0_6px_#9CFF00]" />
+                                    <span className="absolute -left-[2px] h-5 w-[2px] rounded-r-md bg-[#9CFF00] shadow-[0_0_6px_#9CFF00]" />
                                   )}
 
                                   {/* Name */}
@@ -387,7 +383,7 @@ const Sidebar = () => {
 
                                   {/* Active Dot */}
                                   {isActive && (
-                                    <span className="ml-auto h-1 w-1 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
+                                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
                                   )}
                                 </>
                               )}
@@ -411,14 +407,14 @@ const Sidebar = () => {
                   onClick={closeSidebar}
                   className={({ isActive }) =>
                     `
-                      group relative flex h-11
+                      group relative flex h-12
                       items-center gap-3
-                      border px-3
+                      rounded-lg px-4
                       transition-all duration-300
 
                       ${isActive
-                      ? "border-[#9CFF00]/20 bg-[#9CFF00]/[0.06] text-[#9CFF00]"
-                      : "border-transparent text-gray-500 hover:border-white/[0.05] hover:bg-white/[0.02] hover:text-white"
+                      ? "bg-[#9CFF00]/10 text-[#9CFF00] border border-[#9CFF00]/20 shadow-[0_0_10px_rgba(156,255,0,0.05)]"
+                      : "border border-transparent text-gray-400 hover:border-white/[0.05] hover:bg-white/[0.03] hover:text-white"
                     }
                     `
                   }
@@ -427,31 +423,31 @@ const Sidebar = () => {
                     <>
                       {/* Active Line */}
                       {isActive && (
-                        <span className="absolute bottom-2 left-0 top-2 w-[2px] bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
+                        <span className="absolute bottom-3 left-0 top-3 w-[3px] rounded-r-md bg-[#9CFF00] shadow-[0_0_8px_#9CFF00]" />
                       )}
 
                       {/* Number */}
                       <span
                         className={`
-                          w-4 text-[7px] font-bold
+                          w-5 text-[10px] font-bold
 
-                          ${isActive ? "text-[#9CFF00]/60" : "text-gray-800"}
+                          ${isActive ? "text-[#9CFF00]/60" : "text-gray-600"}
                         `}
                       >
                         0{index + 1}
                       </span>
 
                       {/* Icon */}
-                      <Icon size={17} duration={0.5} color="currentColor" />
+                      <Icon size={18} duration={0.5} color="currentColor" />
 
                       {/* Name */}
-                      <span className="text-[9px] font-bold uppercase tracking-[0.15em]">
+                      <span className="text-xs font-bold uppercase tracking-[0.15em]">
                         {item.name}
                       </span>
 
                       {/* Active Dot */}
                       {isActive && (
-                        <span className="ml-auto h-1 w-1 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
+                        <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
                       )}
                     </>
                   )}
@@ -464,7 +460,7 @@ const Sidebar = () => {
               MANAGEMENT
           =================================================== */}
 
-          <p className="mb-3 mt-8 px-3 text-[7px] font-bold uppercase tracking-[0.3em] text-gray-700">
+          <p className="mb-4 mt-8 px-3 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-600">
             Management
           </p>
 
@@ -474,27 +470,27 @@ const Sidebar = () => {
             onClick={closeSidebar}
             className={({ isActive }) =>
               `
-                group flex h-11 items-center gap-3
-                border px-3
+                group flex h-12 items-center gap-3
+                rounded-lg px-4
                 transition-all duration-300
 
                 ${isActive
-                ? "border-[#9CFF00]/20 bg-[#9CFF00]/[0.06] text-[#9CFF00]"
-                : "border-transparent text-gray-500 hover:border-white/[0.05] hover:bg-white/[0.02] hover:text-white"
+                ? "bg-[#9CFF00]/10 text-[#9CFF00] border border-[#9CFF00]/20 shadow-[0_0_10px_rgba(156,255,0,0.05)]"
+                : "border border-transparent text-gray-400 hover:border-white/[0.05] hover:bg-white/[0.03] hover:text-white"
               }
               `
             }
           >
             {({ isActive }) => (
               <>
-                <Settings size={15} strokeWidth={1.7} />
+                <Settings size={18} strokeWidth={1.7} />
 
-                <span className="text-[9px] font-bold uppercase tracking-[0.15em]">
+                <span className="text-xs font-bold uppercase tracking-[0.15em]">
                   Settings
                 </span>
 
                 {isActive && (
-                  <span className="ml-auto h-1 w-1 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
+                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#9CFF00] shadow-[0_0_7px_#9CFF00]" />
                 )}
               </>
             )}
@@ -505,42 +501,42 @@ const Sidebar = () => {
             BOTTOM
         =================================================== */}
 
-        <div className="relative z-10 border-t border-white/[0.06] p-4">
+        <div className="relative z-10 border-t border-white/[0.06] p-5">
           {/* Website Link */}
           <a
             href="https://yourwebsite.com"
             target="_blank"
             rel="noreferrer"
-            className="mb-2 flex h-10 items-center gap-3 border border-white/[0.06] px-3 text-gray-500 transition-all duration-300 hover:border-[#9CFF00]/20 hover:bg-[#9CFF00]/[0.03] hover:text-[#9CFF00]"
+            className="mb-3 flex h-12 items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 text-gray-400 transition-all duration-300 hover:border-[#9CFF00]/30 hover:bg-[#9CFF00]/10 hover:text-[#9CFF00]"
           >
-            <LinkIcon size={14} />
+            <LinkIcon size={16} />
 
-            <span className="text-[8px] font-bold uppercase tracking-[0.15em]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em]">
               View Website
             </span>
 
-            <span className="ml-auto text-[9px]">↗</span>
+            <span className="ml-auto text-xs">↗</span>
           </a>
 
           {/* Logout */}
           <button
             type="button"
-            className="flex h-10 w-full items-center gap-3 border border-transparent px-3 text-gray-600 transition-all duration-300 hover:border-red-500/10 hover:bg-red-500/[0.03] hover:text-red-400"
+            className="flex h-12 w-full items-center gap-3 rounded-lg border border-transparent px-4 text-gray-500 transition-all duration-300 hover:border-red-500/20 hover:bg-red-500/10 hover:text-red-400"
           >
-            <LogOut size={14} />
+            <LogOut size={16} />
 
-            <span className="text-[8px] font-bold uppercase tracking-[0.15em]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em]">
               Logout
             </span>
           </button>
 
           {/* Version */}
-          <div className="mt-4 flex items-center justify-between px-3">
-            <span className="text-[6px] font-bold uppercase tracking-[0.2em] text-gray-800">
+          <div className="mt-5 flex items-center justify-between px-3">
+            <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-gray-600">
               KF Admin
             </span>
 
-            <span className="text-[6px] font-bold uppercase tracking-[0.2em] text-gray-800">
+            <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-gray-600">
               V1.0.0
             </span>
           </div>

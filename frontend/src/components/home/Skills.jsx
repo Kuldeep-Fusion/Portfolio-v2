@@ -327,37 +327,37 @@ const WaveSkillCard = ({
      DRAG END
   ======================================================= */
 
-  const handleDragEnd = async () => {
-    /*
-     * First return to original position.
-     */
-    await controls.start({
-      x: 0,
-      y: 0,
-      rotate: 0,
+  // const handleDragEnd = async () => {
+  //   /*
+  //    * First return to original position.
+  //    */
+  //   await controls.start({
+  //     x: 0,
+  //     y: 0,
+  //     rotate: 0,
 
-      transition: {
-        type: "spring",
-        stiffness: 180,
-        damping: 17,
-        mass: 0.65,
-      },
-    });
+  //     transition: {
+  //       type: "spring",
+  //       stiffness: 180,
+  //       damping: 17,
+  //       mass: 0.65,
+  //     },
+  //   });
 
-    /*
-     * Then restart the wave.
-     */
-    startWave();
-  };
+  //   /*
+  //    * Then restart the wave.
+  //    */
+  //   startWave();
+  // };
 
   return (
     <motion.div
       ref={cardRef}
-      drag
-      dragMomentum={true}
-      dragElastic={0.12}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
+      // drag
+      // dragMomentum={true}
+      // dragElastic={0.12}
+      // onDragStart={handleDragStart}
+      // onDragEnd={handleDragEnd}
       animate={controls}
 
       /* ===================================================
