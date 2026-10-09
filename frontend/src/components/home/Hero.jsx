@@ -532,8 +532,8 @@ const Hero = () => {
               "
             >
 
-              <a href="#work" className="relative z-10">
-                 View My Work
+              <a href="#projects" className="relative z-10">
+                View My Work
               </a>
 
               <span
@@ -572,7 +572,10 @@ const Hero = () => {
                 hover:text-lime-400
               "
             >
-              Contact Me
+              <a href="#contact" className="relative z-10">
+                Contact Me
+              </a>
+
             </Button>
 
           </motion.div>

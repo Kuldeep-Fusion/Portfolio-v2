@@ -1,62 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
+import { GetAllProjects } from "../../services/api";
 
-const projects = [
-  {
-    number: "01",
-    title: "AI SaaS Platform",
-    category: "AI / SAAS",
-    status: "LIVE",
-    description:
-      "AI-powered SaaS platform built to automate workflows, generate intelligent content and improve productivity using modern LLM APIs.",
-    technologies: ["Next.js", "OpenAI", "MongoDB", "Tailwind"],
-    image: "/projects/ai-saas.png",
-    live: "#",
-    github: "#",
-  },
-  {
-    number: "02",
-    title: "Developer Dashboard",
-    category: "WEB APPLICATION",
-    status: "LIVE",
-    description:
-      "Modern developer dashboard with analytics, reusable components and responsive interfaces.",
-    technologies: ["React", "Node.js", "MongoDB"],
-    image: "/projects/dashboard.png",
-    live: "#",
-    github: "#",
-  },
-  {
-    number: "03",
-    title: "Automation Engine",
-    category: "BACKEND / API",
-    status: "LIVE",
-    description:
-      "Backend automation system connecting APIs, processing data and executing automated workflows.",
-    technologies: ["Node.js", "Express", "REST API"],
-    image: "/projects/automation.png",
-    live: "#",
-    github: "#",
-  },
-  {
-    number: "04",
-    title: "E-Commerce Platform",
-    category: "FULL STACK",
-    status: "LIVE",
-    description:
-      "Production-ready e-commerce platform with product management, responsive UI, secure APIs and scalable backend architecture.",
-    technologies: ["Next.js", "MongoDB", "REST API", "Tailwind"],
-    image: "/projects/ecommerce.png",
-    live: "#",
-    github: "#",
-  },
-];
-
-/* =========================================================
-   PROJECT CARD
-========================================================= */
 
 const ProjectCard = ({ project, index }) => {
+
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -126,8 +75,8 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Image */}
         <img
-          src={project.image}
-          alt={project.title}
+          src={project?.image?.url || project?.image || ''}
+          alt={project?.title || 'Project'}
           className="relative h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105"
         />
 
@@ -136,14 +85,14 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Project Number bg */}
         <div className="absolute bottom-2 left-3 z-20 select-none text-[64px] font-black leading-none tracking-[-0.08em] text-white/[0.07]">
-          {project.number}
+          {project?.number || `0${index + 1}`}
         </div>
 
         {/* Number label */}
         <div className="absolute bottom-3 left-4 z-20 flex items-center gap-2">
           <span className="h-px w-5 bg-[#9CFF00]" />
           <span className="text-[7px] font-black uppercase tracking-[0.2em] text-[#9CFF00]">
-            Project {project.number}
+            Project {project?.number || `0${index + 1}`}
           </span>
         </div>
 
@@ -178,7 +127,7 @@ const ProjectCard = ({ project, index }) => {
 
           {/* Title */}
           <h3 className="mt-2.5 text-xl font-black uppercase leading-[0.92] tracking-[-0.035em] text-white transition-colors duration-300 group-hover:text-[#9CFF00]">
-            {project.title}
+            {project?.title || 'Project Title'}
           </h3>
 
           {/* Divider */}
@@ -195,7 +144,7 @@ const ProjectCard = ({ project, index }) => {
               Built With
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {project.technologies.map((technology) => (
+              {(project?.technologies || []).map((technology) => (
                 <span
                   key={technology}
                   className="
@@ -226,12 +175,14 @@ const ProjectCard = ({ project, index }) => {
             ACTIONS
         ================================================= */}
 
-        <div className="mt-5 flex items-center gap-2">
+        <div className="mt-5 flex items-center gap-3">
           <a
-            href={project.live}
+            href={project?.links?.live || project?.live || "#"}
+            target="_blank"
+            rel="noreferrer"
             className="
               inline-flex
-              min-h-[36px]
+              min-h-[40px]
               flex-1
               items-center
               justify-center
@@ -239,42 +190,48 @@ const ProjectCard = ({ project, index }) => {
               bg-[#9CFF00]
               px-4
               py-2
-              text-[7px]
+              text-[8px]
               font-black
               uppercase
               tracking-[0.15em]
               text-black
               transition-all
               duration-300
-              hover:shadow-[0_0_25px_rgba(156,255,0,0.35)]
+              hover:shadow-[0_0_25px_rgba(156,255,0,0.4)]
+              hover:scale-[1.02]
             "
           >
-            View Live
+            Live App
             <span>↗</span>
           </a>
 
           <a
-            href={project.github}
+            href={project?.links?.github || project?.github || "#"}
+            target="_blank"
+            rel="noreferrer"
             className="
               inline-flex
-              min-h-[36px]
+              min-h-[40px]
               flex-1
               items-center
               justify-center
               gap-2
               border
-              border-white/10
+              border-[#9CFF00]/40
+              bg-[#9CFF00]/10
               px-4
               py-2
-              text-[7px]
+              text-[8px]
               font-black
               uppercase
               tracking-[0.15em]
-              text-gray-400
+              text-[#9CFF00]
               transition-all
               duration-300
-              hover:border-[#9CFF00]/40
-              hover:text-[#9CFF00]
+              hover:bg-[#9CFF00]/20
+              hover:border-[#9CFF00]/80
+              hover:shadow-[0_0_20px_rgba(156,255,0,0.15)]
+              hover:scale-[1.02]
             "
           >
             GitHub
@@ -282,17 +239,36 @@ const ProjectCard = ({ project, index }) => {
           </a>
         </div>
       </div>
+
     </motion.article>
   );
 };
 
-/* =========================================================
-   PROJECT SECTION
-========================================================= */
 
 const Project = () => {
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true, margin: "-80px" });
+  const [projectsData, setProjectsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const res = await GetAllProjects();
+        if (res?.data && Array.isArray(res.data)) {
+          setProjectsData(res.data);
+        } else if (res && Array.isArray(res)) {
+          setProjectsData(res);
+        }
+      } catch (err) {
+        console.error("Failed to fetch projects", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   return (
     <section
@@ -341,7 +317,7 @@ const Project = () => {
           <div className="mt-4 flex items-center gap-3">
             <div className="h-px w-8 bg-[#9CFF00]/50" />
             <span className="text-[8px] font-bold uppercase tracking-[0.25em] text-gray-600">
-              {projects.length} Projects
+              {projectsData.length} Projects
             </span>
           </div>
         </motion.div>
@@ -351,9 +327,15 @@ const Project = () => {
         ================================================= */}
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.number} project={project} index={index} />
-          ))}
+          {loading ? (
+            <div className="col-span-full py-20 flex flex-col items-center justify-center text-[#9CFF00]">
+              <div className="text-sm font-bold uppercase tracking-[0.2em] animate-pulse">Initializing Datalink...</div>
+            </div>
+          ) : (
+            projectsData.map((project, index) => (
+              <ProjectCard key={project._id || project.id || index} project={project} index={index} />
+            ))
+          )}
         </div>
 
         {/* =================================================
@@ -375,7 +357,7 @@ const Project = () => {
 
           {/* Count */}
           <div className="flex items-center gap-2 text-[7px] font-bold uppercase tracking-[0.15em] sm:gap-3 sm:text-[8px]">
-            <span className="text-gray-700">0{projects.length}</span>
+            <span className="text-gray-700">0{projectsData.length}</span>
             <span className="h-px w-5 bg-gray-800 sm:w-8" />
             <span className="text-[#9CFF00]">PROJECTS</span>
           </div>

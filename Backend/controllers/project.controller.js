@@ -20,9 +20,6 @@ export async function PostProject(req, res) {
     console.log("BODY:", req.body);
     console.log("FILE:", req.file);
 
-    // --------------------------------
-    // Parse FormData JSON fields
-    // --------------------------------
 
     let parsedLinks = {};
     let parsedTechnologies = [];
@@ -196,56 +193,55 @@ export async function PostProject(req, res) {
 }
 
 
-
 export async function GetProjects(req, res) {
-    try {
-        const data = await Project.find().sort({createdAt: -1});
-        return res.status(201).json({
-            message: 'ALL PROJECT DATA RECEIVE',
-            success: false,
-            data: data
-        })
+  try {
+    const data = await Project.find().sort({ createdAt: 1 });
+    return res.status(201).json({
+      message: 'ALL PROJECT DATA RECEIVE',
+      success: false,
+      data: data
+    })
 
-    } catch (error) {
-        return res.status(201).json({
-            message: 'ALL PROJECT DATA RECEIVE',
-            success: false,
-        })
-    }    
+  } catch (error) {
+    return res.status(201).json({
+      message: 'ALL PROJECT DATA RECEIVE',
+      success: false,
+    })
+  }
 }
 
 
 export async function DeleteProject(req, res) {
   try {
-    const {id} = await req.params;
+    const { id } = await req.params;
 
-  const project = await Project.findById(id);
+    const project = await Project.findById(id);
 
-  if(!project){
-    return res.status(404).json({
-      message: 'not found',
-      success: false,
-    });
-  }
-
-  //delete image from cloudnary
-  if(project.image?.publicId){
-    try {
-      await cloudinary.uploader.destroy(
-        project.image.public_id,
-      {
-        secure_url: "image"
-      }
-    );
-    } catch (error) {
-      console.error("Clooudinar Delete Error");
-
+    if (!project) {
+      return res.status(404).json({
+        message: 'not found',
+        success: false,
+      });
     }
-  }
 
-  await Project.findByIdAndDelete(id);
+    //delete image from cloudnary
+    if (project.image?.publicId) {
+      try {
+        await cloudinary.uploader.destroy(
+          project.image.public_id,
+          {
+            secure_url: "image"
+          }
+        );
+      } catch (error) {
+        console.error("Clooudinar Delete Error");
 
-   return res.status(200).json({
+      }
+    }
+
+    await Project.findByIdAndDelete(id);
+
+    return res.status(200).json({
       success: true,
       message: "PROJECT DELETED SUCCESSFULLY",
     });
@@ -258,5 +254,5 @@ export async function DeleteProject(req, res) {
       error: error.message,
     });
   }
-  
+
 }
