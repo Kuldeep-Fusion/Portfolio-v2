@@ -5,7 +5,7 @@ import Header from "../components/common/Header";
 
 const AdminLayout = () => {
   return (
-    <div className="min-h-screen bg-[#080b08] text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-800">
 
       <Sidebar />
 

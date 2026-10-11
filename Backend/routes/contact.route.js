@@ -1,9 +1,21 @@
 import express from 'express';
-import { ContactData, ContactGet } from '../controllers/contact.controller.js';
+import { 
+    getContacts, 
+    getContactById, 
+    createContact, 
+    updateContact, 
+    deleteContact 
+} from '../controllers/contact.controller.js';
 
 const router = express.Router();
 
-router.post('/register', ContactData);
-router.get('/get-contact', ContactGet);
+router.route('/')
+    .get(getContacts)
+    .post(createContact);
+
+router.route('/:id')
+    .get(getContactById)
+    .put(updateContact)
+    .delete(deleteContact);
 
 export default router;

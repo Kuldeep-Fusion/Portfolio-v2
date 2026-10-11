@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { postProject } from "../../services/api";
+import { postProject, updateProject } from "../../services/api";
 
 import {
   ImageIcon,
@@ -11,7 +10,7 @@ import {
   SaveIcon,
 } from "@animateicons/react/lucide";
 
-const ProjectForm = ({ project, setProject }) => {
+const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
   const [technology, setTechnology] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -133,7 +132,7 @@ const ProjectForm = ({ project, setProject }) => {
       return;
     }
 
-    if (!project.image?.file) {
+    if (!isEdit && !project.image?.file) {
       alert("Please select a project image.");
       return;
     }
@@ -213,73 +212,46 @@ const ProjectForm = ({ project, setProject }) => {
 
       // =========================================
       // IMAGE FILE
-      // IMPORTANT:
-      // project.image = { file, preview }
-      // Backend needs the actual File
       // =========================================
 
-      formData.append(
-        "image",
-        project.image.file
-      );
-
-      // =========================================
-      // DEBUG FORMDATA
-      // =========================================
-
-      console.log(
-        "========== PROJECT FORM DATA =========="
-      );
-
-      for (const [key, value] of formData.entries()) {
-        if (value instanceof File) {
-          console.log(key, {
-            name: value.name,
-            type: value.type,
-            size: value.size,
-          });
-        } else {
-          console.log(key, value);
-        }
+      if (project.image?.file) {
+        formData.append(
+          "image",
+          project.image.file
+        );
       }
-
-      console.log(
-        "======================================="
-      );
 
       // =========================================
       // API REQUEST
       // =========================================
 
-      const result = await postProject(formData);
-
-      console.log(
-        "Project Created:",
-        result
-      );
-
-      alert("Project created successfully!");
-
-      // Optional reset
-      setProject({
-        title: "",
-        slug: "",
-        tagline: "",
-        description: "",
-        links: {
-          live: "",
-          github: "",
-        },
-        technologies: [],
-        featured: false,
-        order: 0,
-        imageAlt: "",
-        image: {
-          file: null,
-          preview: "",
-        },
-      });
-
+      let result;
+      if (isEdit) {
+        result = await updateProject(projectId, formData);
+        alert("Project updated successfully!");
+      } else {
+        result = await postProject(formData);
+        alert("Project created successfully!");
+        // Reset if created
+        setProject({
+          title: "",
+          slug: "",
+          tagline: "",
+          description: "",
+          links: {
+            live: "",
+            github: "",
+          },
+          technologies: [],
+          featured: false,
+          order: 0,
+          imageAlt: "",
+          image: {
+            file: null,
+            preview: "",
+          },
+        });
+      }
       setTechnology("");
     } catch (error) {
       console.error(
@@ -313,13 +285,13 @@ const ProjectForm = ({ project, setProject }) => {
           BASIC INFORMATION
       ===================================== */}
 
-      <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3b82f6]">
             01 / Information
           </p>
 
-          <h2 className="mt-2 text-lg font-semibold text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-900">
             Basic Information
           </h2>
 
@@ -332,7 +304,7 @@ const ProjectForm = ({ project, setProject }) => {
           {/* TITLE */}
 
           <div>
-            <label className="admin-label">
+            <label className="text-sm font-semibold text-gray-700">
               Project Title
             </label>
 
@@ -342,7 +314,7 @@ const ProjectForm = ({ project, setProject }) => {
               value={project.title}
               onChange={handleChange}
               placeholder="Portfolio Website"
-              className="mt-2 w-full rounded-xl border border-white/20 bg-transparent p-2 text-white outline-none"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               required
             />
           </div>
@@ -350,7 +322,7 @@ const ProjectForm = ({ project, setProject }) => {
           {/* SLUG */}
 
           <div>
-            <label className="admin-label">
+            <label className="text-sm font-semibold text-gray-700">
               Slug
             </label>
 
@@ -360,7 +332,7 @@ const ProjectForm = ({ project, setProject }) => {
               value={project.slug}
               onChange={handleChange}
               placeholder="portfolio-website"
-              className="mt-2 w-full rounded-xl border border-white/20 bg-transparent p-2 text-white outline-none"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               required
             />
           </div>
@@ -368,7 +340,7 @@ const ProjectForm = ({ project, setProject }) => {
           {/* TAGLINE */}
 
           <div className="md:col-span-2">
-            <label className="admin-label">
+            <label className="text-sm font-semibold text-gray-700">
               Tagline
             </label>
 
@@ -378,14 +350,14 @@ const ProjectForm = ({ project, setProject }) => {
               value={project.tagline}
               onChange={handleChange}
               placeholder="A sleek modern portfolio built with Next.js..."
-              className="mt-2 w-full rounded-xl border border-white/20 bg-transparent p-2 text-white outline-none"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
 
           {/* DESCRIPTION */}
 
           <div className="md:col-span-2">
-            <label className="admin-label">
+            <label className="text-sm font-semibold text-gray-700">
               Description
             </label>
 
@@ -395,7 +367,7 @@ const ProjectForm = ({ project, setProject }) => {
               onChange={handleChange}
               rows={6}
               placeholder="Describe your project..."
-              className="mt-2 w-full resize-none rounded-xl border border-white/20 bg-transparent p-2 text-white outline-none"
+              className="mt-2 w-full resize-none rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               required
             />
           </div>
@@ -406,13 +378,13 @@ const ProjectForm = ({ project, setProject }) => {
           TECHNOLOGIES
       ===================================== */}
 
-      <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3b82f6]">
             02 / Stack
           </p>
 
-          <h2 className="mt-2 text-lg font-semibold text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-900">
             Technologies
           </h2>
         </div>
@@ -426,13 +398,13 @@ const ProjectForm = ({ project, setProject }) => {
             }
             onKeyDown={handleTechnologyKeyDown}
             placeholder="React"
-            className="admin-input flex-1"
+            className="flex-1 mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
 
           <button
             type="button"
             onClick={addTechnology}
-            className="flex items-center gap-2 rounded-xl bg-[#9CFF00] px-4 py-2.5 text-sm font-semibold text-black transition hover:brightness-110"
+            className="flex items-center gap-2 rounded-xl bg-[#3b82f6] px-4 py-2.5 text-sm font-semibold text-black transition hover:brightness-110"
           >
             <PlusIcon size={16} />
             Add
@@ -444,7 +416,7 @@ const ProjectForm = ({ project, setProject }) => {
             {project.technologies.map((tech) => (
               <span
                 key={tech}
-                className="inline-flex items-center gap-2 rounded-lg border border-[#9CFF00]/20 bg-[#9CFF00]/5 px-3 py-1.5 text-sm text-[#9CFF00]"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#3b82f6]/20 bg-[#3b82f6]/5 px-3 py-1.5 text-sm text-[#3b82f6]"
               >
                 {tech}
 
@@ -453,7 +425,7 @@ const ProjectForm = ({ project, setProject }) => {
                   onClick={() =>
                     removeTechnology(tech)
                   }
-                  className="transition hover:text-white"
+                  className="transition hover:text-gray-900"
                 >
                   <XIcon size={13} />
                 </button>
@@ -467,13 +439,13 @@ const ProjectForm = ({ project, setProject }) => {
           LINKS
       ===================================== */}
 
-      <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3b82f6]">
             03 / Links
           </p>
 
-          <h2 className="mt-2 text-lg font-semibold text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-900">
             Project Links
           </h2>
         </div>
@@ -482,7 +454,7 @@ const ProjectForm = ({ project, setProject }) => {
           {/* LIVE */}
 
           <div>
-            <label className="admin-label flex items-center gap-2">
+            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
               <LinkIcon size={14} />
               Live URL
             </label>
@@ -500,14 +472,14 @@ const ProjectForm = ({ project, setProject }) => {
                 }))
               }
               placeholder="https://example.com"
-              className="admin-input"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
 
           {/* GITHUB */}
 
           <div>
-            <label className="admin-label flex items-center gap-2">
+            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
               <GithubIcon size={14} />
               GitHub URL
             </label>
@@ -525,7 +497,7 @@ const ProjectForm = ({ project, setProject }) => {
                 }))
               }
               placeholder="https://github.com/username/project"
-              className="admin-input"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
@@ -535,18 +507,18 @@ const ProjectForm = ({ project, setProject }) => {
           IMAGE
       ===================================== */}
 
-      <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3b82f6]">
             04 / Media
           </p>
 
-          <h2 className="mt-2 text-lg font-semibold text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-900">
             Project Image
           </h2>
         </div>
 
-        <label className="flex min-h-48 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-black/10 p-6 text-center transition hover:border-[#9CFF00]/40">
+        <label className="flex min-h-48 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-black/10 p-6 text-center transition hover:border-[#3b82f6]/40">
           {project.image?.preview ? (
             <img
               src={project.image.preview}
@@ -580,7 +552,7 @@ const ProjectForm = ({ project, setProject }) => {
         {/* ALT */}
 
         <div className="mt-5">
-          <label className="admin-label">
+          <label className="text-sm font-semibold text-gray-700">
             Image Alt Text
           </label>
 
@@ -590,7 +562,7 @@ const ProjectForm = ({ project, setProject }) => {
             value={project.imageAlt || ""}
             onChange={handleChange}
             placeholder="Portfolio Website Homepage Screenshot"
-            className="admin-input"
+            className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
       </div>
@@ -599,13 +571,13 @@ const ProjectForm = ({ project, setProject }) => {
           SETTINGS
       ===================================== */}
 
-      <div className="rounded-2xl border border-white/10 bg-[#0d120d] p-5 sm:p-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
         <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#9CFF00]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3b82f6]">
             05 / Settings
           </p>
 
-          <h2 className="mt-2 text-lg font-semibold text-white">
+          <h2 className="mt-2 text-lg font-semibold text-gray-900">
             Project Settings
           </h2>
         </div>
@@ -614,7 +586,7 @@ const ProjectForm = ({ project, setProject }) => {
           {/* ORDER */}
 
           <div>
-            <label className="admin-label">
+            <label className="text-sm font-semibold text-gray-700">
               Display Order
             </label>
 
@@ -624,23 +596,23 @@ const ProjectForm = ({ project, setProject }) => {
               min="0"
               value={project.order}
               onChange={handleChange}
-              className="admin-input"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-white p-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
 
           {/* FEATURED */}
 
-          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-black/10 px-4 py-3">
+          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
             <input
               type="checkbox"
               name="featured"
               checked={Boolean(project.featured)}
               onChange={handleChange}
-              className="h-4 w-4 accent-[#9CFF00]"
+              className="h-4 w-4 accent-[#3b82f6]"
             />
 
             <div>
-              <p className="text-sm font-medium text-white">
+              <p className="text-sm font-medium text-gray-900">
                 Featured Project
               </p>
 
@@ -660,7 +632,7 @@ const ProjectForm = ({ project, setProject }) => {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#9CFF00] px-6 py-3 text-sm font-bold text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           <SaveIcon size={17} />
 

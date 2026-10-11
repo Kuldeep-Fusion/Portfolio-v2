@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 //post contact
 export async function PostContact(data) {
     try {
-        const response = await axios.post(`${API_URL}/contact/register`, data);
+        const response = await axios.post(`${API_URL}/contact`, data);
         return response.data
     } catch (error) {
         console.log(
@@ -35,7 +35,7 @@ export async function GetProjectById(id) {
 // Get all projects
 export async function GetAllProjects() {
     try {
-        const response = await axios.get(`${API_URL}/project/get-project`);
+        const response = await axios.get(`${API_URL}/project`);
         return response.data;
     } catch (error) {
         console.log(

@@ -3,7 +3,7 @@ import Project from "../models/project.model.js";
 import { UploadCloudinary } from "../utils/cloudinary.js";
 
 
-export async function PostProject(req, res) {
+export async function createProject(req, res) {
   try {
     const {
       title,
@@ -193,7 +193,7 @@ export async function PostProject(req, res) {
 }
 
 
-export async function GetProjects(req, res) {
+export async function getProjects(req, res) {
   try {
     const data = await Project.find().sort({ createdAt: 1 });
     return res.status(201).json({
@@ -211,7 +211,7 @@ export async function GetProjects(req, res) {
 }
 
 
-export async function DeleteProject(req, res) {
+export async function deleteProject(req, res) {
   try {
     const { id } = await req.params;
 
@@ -255,4 +255,102 @@ export async function DeleteProject(req, res) {
     });
   }
 
+}
+
+export async function getProjectById(req, res) {
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Project retrieved successfully",
+      data: project,
+    });
+  } catch (error) {
+    console.error("getProjectById Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server Error: Failed to retrieve project",
+    });
+  }
+}
+
+export async function updateProject(req, res) {
+  try {
+    const { id } = req.params;
+    let project = await Project.findById(id);
+
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
+    }
+
+    // Handle optional image upload on update
+    let updatedImageData = project.image;
+    if (req.file) {
+      // Destroy old image
+      if (project.image?.publicId) {
+        try {
+          await cloudinary.uploader.destroy(project.image.publicId);
+        } catch (err) {
+          console.error("Cloudinary Delete Old Image Error");
+        }
+      }
+      
+      // Upload new image
+      const uploadImage = await UploadCloudinary(req.file.buffer, "projects");
+      if (uploadImage?.secure_url) {
+        updatedImageData = {
+          url: uploadImage.secure_url,
+          publicId: uploadImage.public_id,
+          alt: req.body.imageAlt?.trim() || project.title,
+        };
+      }
+    }
+
+    // Process other fields similarly to createProject
+    let parsedLinks = project.links;
+    let parsedTechnologies = project.technologies;
+    
+    if (req.body.links) {
+      try { parsedLinks = JSON.parse(req.body.links); } catch(e){}
+    }
+    if (req.body.technologies) {
+      try { parsedTechnologies = JSON.parse(req.body.technologies); } catch(e){}
+    }
+
+    const updatedData = {
+      title: req.body.title?.trim() || project.title,
+      slug: req.body.slug?.trim() || project.slug,
+      tagline: req.body.tagline?.trim() || project.tagline,
+      description: req.body.description?.trim() || project.description,
+      image: updatedImageData,
+      links: parsedLinks,
+      technologies: parsedTechnologies,
+      featured: req.body.featured !== undefined ? (req.body.featured === true || req.body.featured === "true") : project.featured,
+      order: req.body.order !== undefined ? Number(req.body.order) : project.order,
+    };
+
+    project = await Project.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
+
+    return res.status(200).json({
+      success: true,
+      message: "Project updated successfully",
+      data: project,
+    });
+  } catch (error) {
+    console.error("updateProject Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server Error: Failed to update project",
+      error: error.message,
+    });
+  }
 }

@@ -51,6 +51,12 @@ function App() {
               element={<CreateProject />}
             />
 
+            {/* /admin/projects/edit/:id */}
+            <Route
+              path="projects/edit/:id"
+              element={<CreateProject />}
+            />
+
             {/* /admin/contact */}
             <Route
               path="contact"
