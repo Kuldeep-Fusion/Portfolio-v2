@@ -35,9 +35,11 @@ const AdminLogin = () => {
   */
 
   useEffect(() => {
-    const isLoggedIn = sessionStorage.getItem("adminLoggedIn");
+    const isLoggedIn =
+      localStorage.getItem("adminLoggedIn") === "true" ||
+      sessionStorage.getItem("adminLoggedIn") === "true";
 
-    if (isLoggedIn === "true") {
+    if (isLoggedIn) {
       navigate("/admin", {
         replace: true,
       });
@@ -93,6 +95,7 @@ const AdminLogin = () => {
 
     // Login successful
     sessionStorage.setItem("adminLoggedIn", "true");
+    localStorage.setItem("adminLoggedIn", "true");
 
     navigate("/admin", {
       replace: true,

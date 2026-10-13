@@ -196,24 +196,25 @@ export async function createProject(req, res) {
 export async function getProjects(req, res) {
   try {
     const data = await Project.find().sort({ createdAt: 1 });
-    return res.status(201).json({
-      message: 'ALL PROJECT DATA RECEIVE',
-      success: false,
+    return res.status(200).json({
+      message: 'ALL PROJECT DATA RECEIVED',
+      success: true,
       data: data
-    })
+    });
 
   } catch (error) {
-    return res.status(201).json({
-      message: 'ALL PROJECT DATA RECEIVE',
+    return res.status(500).json({
+      message: 'FAILED TO RECEIVE PROJECT DATA',
       success: false,
-    })
+      error: error.message,
+    });
   }
 }
 
 
 export async function deleteProject(req, res) {
   try {
-    const { id } = await req.params;
+    const { id } = req.params;
 
     const project = await Project.findById(id);
 
@@ -224,18 +225,12 @@ export async function deleteProject(req, res) {
       });
     }
 
-    //delete image from cloudnary
+    // Delete image from Cloudinary
     if (project.image?.publicId) {
       try {
-        await cloudinary.uploader.destroy(
-          project.image.public_id,
-          {
-            secure_url: "image"
-          }
-        );
+        await cloudinary.uploader.destroy(project.image.publicId);
       } catch (error) {
-        console.error("Clooudinar Delete Error");
-
+        console.error("Cloudinary Delete Error:", error);
       }
     }
 
@@ -292,6 +287,20 @@ export async function updateProject(req, res) {
       });
     }
 
+    // Check duplicate slug if changing slug
+    if (req.body.slug && req.body.slug.trim().toLowerCase() !== project.slug.toLowerCase()) {
+      const duplicateSlug = await Project.findOne({
+        slug: req.body.slug.trim().toLowerCase(),
+        _id: { $ne: id },
+      });
+      if (duplicateSlug) {
+        return res.status(409).json({
+          success: false,
+          message: "Project with this slug already exists",
+        });
+      }
+    }
+
     // Handle optional image upload on update
     let updatedImageData = project.image;
     if (req.file) {
@@ -300,7 +309,7 @@ export async function updateProject(req, res) {
         try {
           await cloudinary.uploader.destroy(project.image.publicId);
         } catch (err) {
-          console.error("Cloudinary Delete Old Image Error");
+          console.error("Cloudinary Delete Old Image Error:", err);
         }
       }
       
@@ -313,6 +322,11 @@ export async function updateProject(req, res) {
           alt: req.body.imageAlt?.trim() || project.title,
         };
       }
+    } else if (req.body.imageAlt !== undefined) {
+      updatedImageData = {
+        ...project.image,
+        alt: req.body.imageAlt.trim() || project.title,
+      };
     }
 
     // Process other fields similarly to createProject
@@ -338,7 +352,7 @@ export async function updateProject(req, res) {
       order: req.body.order !== undefined ? Number(req.body.order) : project.order,
     };
 
-    project = await Project.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
+    project = await Project.findByIdAndUpdate(id, updatedData, { returnDocument: 'after', new: true, runValidators: true });
 
     return res.status(200).json({
       success: true,

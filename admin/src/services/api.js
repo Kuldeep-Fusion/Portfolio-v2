@@ -8,6 +8,7 @@ export const getProjects = async () => {
     return response.data;
   } catch (error) {
     console.error("Get Projects Error:", error);
+    throw error;
   }
 };
 
@@ -18,6 +19,7 @@ export const getProjectById = async (id) => {
     return response.data;
   } catch (error) {
     console.error("Get Project By ID Error:", error);
+    throw error;
   }
 };
 
@@ -28,6 +30,7 @@ export const postProject = async (data) => {
     return response.data;
   } catch (error) {
     console.error("Create Project Error:", error);
+    throw error;
   }
 };
 
@@ -38,6 +41,7 @@ export const updateProject = async (id, data) => {
     return response.data;
   } catch (error) {
     console.error("Update Project Error:", error);
+    throw error;
   }
 };
 
@@ -48,6 +52,7 @@ export const deleteProject = async (id) => {
     return response.data;
   } catch (error) {
     console.error("Delete Project Error:", error);
+    throw error;
   }
 };
 
@@ -69,6 +74,7 @@ export const getContact = async () => {
     return response.data;
   } catch (error) {
     console.error("Get Contact Error:", error);
+    throw error;
   }
 };
 

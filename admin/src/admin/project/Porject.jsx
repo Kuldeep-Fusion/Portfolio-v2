@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ProjectCard from "../../components/ProjectCard";
 import { deleteProject, getProjects } from "../../services/api";
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -38,7 +40,7 @@ const Projects = () => {
   };
 
   const handleEdit = (project) => {
-    window.location.href = `/admin/projects/edit/${project._id}`;
+    navigate(`/admin/projects/edit/${project._id}`);
   };
 
   if (loading) {
@@ -75,21 +77,21 @@ const Projects = () => {
             <p className="text-xs font-medium text-gray-500">Total</p>
             <p className="text-lg font-bold text-blue-600">{projects.length}</p>
           </div>
-          <a
-            href="/admin/projects/create"
+          <Link
+            to="/admin/projects/create"
             className="flex h-full items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700"
           >
             + Add New Project
-          </a>
+          </Link>
         </div>
       </div>
 
       {projects.length === 0 ? (
         <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-white shadow-sm">
           <p className="text-sm font-medium text-gray-500">No Projects Found</p>
-          <a href="/admin/projects/create" className="mt-4 text-xs font-medium text-blue-600 hover:underline">
+          <Link to="/admin/projects/create" className="mt-4 text-xs font-medium text-blue-600 hover:underline">
             Create your first project
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">

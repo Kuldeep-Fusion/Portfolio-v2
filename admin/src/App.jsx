@@ -27,6 +27,10 @@ function App() {
           path="/admin/login"
           element={<AdminLogin />}
         />
+        <Route
+          path="/auth/login"
+          element={<Navigate to="/admin/login" replace />}
+        />
 
         {/* PROTECTED ADMIN */}
         <Route element={<ProtectedAdminRoute />}>

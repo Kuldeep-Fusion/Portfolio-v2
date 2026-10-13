@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import {
@@ -48,10 +48,17 @@ const navItems = [
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
 
   const closeSidebar = () => setIsOpen(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminLoggedIn");
+    sessionStorage.removeItem("adminLoggedIn");
+    navigate("/admin/login", { replace: true });
+  };
 
   const toggleMenu = (menuName) => {
     setOpenMenu((prev) => (prev === menuName ? null : menuName));
@@ -190,7 +197,10 @@ const Sidebar = () => {
             <SettingsIcon size={20} />
             Settings
           </NavLink>
-          <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-red-600">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-red-600 cursor-pointer"
+          >
             <LogOut size={20} />
             Log out
           </button>

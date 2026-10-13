@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { postProject, updateProject } from "../../services/api";
 
 import {
@@ -11,6 +12,7 @@ import {
 } from "@animateicons/react/lucide";
 
 const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
+  const navigate = useNavigate();
   const [technology, setTechnology] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -225,43 +227,26 @@ const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
       // API REQUEST
       // =========================================
 
-      let result;
       if (isEdit) {
-        result = await updateProject(projectId, formData);
+        await updateProject(projectId, formData);
         alert("Project updated successfully!");
+        navigate("/admin/projects");
       } else {
-        result = await postProject(formData);
+        await postProject(formData);
         alert("Project created successfully!");
-        // Reset if created
-        setProject({
-          title: "",
-          slug: "",
-          tagline: "",
-          description: "",
-          links: {
-            live: "",
-            github: "",
-          },
-          technologies: [],
-          featured: false,
-          order: 0,
-          imageAlt: "",
-          image: {
-            file: null,
-            preview: "",
-          },
-        });
+        navigate("/admin/projects");
       }
       setTechnology("");
     } catch (error) {
       console.error(
-        "Failed to create project:",
+        isEdit ? "Failed to update project:" : "Failed to create project:",
         error
       );
 
       alert(
         error?.response?.data?.message ||
-          "Failed to create project."
+          error?.message ||
+          (isEdit ? "Failed to update project." : "Failed to create project.")
       );
     } finally {
       setLoading(false);
@@ -637,8 +622,8 @@ const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
           <SaveIcon size={17} />
 
           {loading
-            ? "Creating..."
-            : "Create Project"}
+            ? (isEdit ? "Updating..." : "Creating...")
+            : (isEdit ? "Update Project" : "Create Project")}
         </button>
       </div>
     </form>
