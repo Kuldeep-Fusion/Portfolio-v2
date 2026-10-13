@@ -243,11 +243,13 @@ const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
         error
       );
 
-      alert(
+      const errorMessage =
         error?.response?.data?.message ||
-          error?.message ||
-          (isEdit ? "Failed to update project." : "Failed to create project.")
-      );
+        error?.response?.data?.error ||
+        error?.message ||
+        (isEdit ? "Failed to update project." : "Failed to create project.");
+
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -296,6 +298,7 @@ const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
             <input
               type="text"
               name="title"
+              maxLength={100}
               value={project.title}
               onChange={handleChange}
               placeholder="Portfolio Website"
@@ -326,12 +329,13 @@ const ProjectForm = ({ project, setProject, isEdit, projectId }) => {
 
           <div className="md:col-span-2">
             <label className="text-sm font-semibold text-gray-700">
-              Tagline
+              Tagline (Max 150 chars)
             </label>
 
             <input
               type="text"
               name="tagline"
+              maxLength={150}
               value={project.tagline}
               onChange={handleChange}
               placeholder="A sleek modern portfolio built with Next.js..."

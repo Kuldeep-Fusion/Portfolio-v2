@@ -29,12 +29,17 @@ app.use(
         origin.startsWith("http://localhost:") ||
         origin.startsWith("http://127.0.0.1:");
 
-      if (allowedOrigins.indexOf(origin) !== -1 || isLocalhost) {
+      const isVercel =
+        origin.endsWith(".vercel.app") ||
+        origin.includes(".vercel.app");
+
+      if (allowedOrigins.indexOf(origin) !== -1 || isLocalhost || isVercel) {
         return callback(null, true);
       }
 
-      var msg = "The CORS policy for this site does not allow access from the specified Origin.";
-      return callback(new Error(msg), false);
+      // Instead of throwing an error which causes a 500 internal server error,
+      // silently reject CORS origin
+      return callback(null, false);
     },
     credentials: true,
   })

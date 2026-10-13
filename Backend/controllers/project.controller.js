@@ -106,8 +106,10 @@ export async function createProject(req, res) {
     // Check duplicate slug
     // --------------------------------
 
+    const cleanSlug = slug.trim().toLowerCase();
+
     const existingProject = await Project.findOne({
-      slug: slug.trim(),
+      slug: cleanSlug,
     });
 
     if (existingProject) {
@@ -135,8 +137,6 @@ export async function createProject(req, res) {
       });
     }
 
-
-
     // --------------------------------
     // Create project
     // --------------------------------
@@ -144,7 +144,7 @@ export async function createProject(req, res) {
     const project = await Project.create({
       title: title.trim(),
 
-      slug: slug.trim(),
+      slug: cleanSlug,
 
       tagline: tagline?.trim() || "",
 
@@ -184,9 +184,26 @@ export async function createProject(req, res) {
   } catch (error) {
     console.error("PostProject Error:", error);
 
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Project with this slug already exists",
+        error: "Duplicate slug error",
+      });
+    }
+
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        message: messages.join(", "),
+        error: error.message,
+      });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "PROJECT FAILED TO CREATE",
+      message: error.message || "PROJECT FAILED TO CREATE",
       error: error.message,
     });
   }
@@ -361,9 +378,27 @@ export async function updateProject(req, res) {
     });
   } catch (error) {
     console.error("updateProject Error:", error);
+
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Project with this slug already exists",
+        error: "Duplicate slug error",
+      });
+    }
+
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map((val) => val.message);
+      return res.status(400).json({
+        success: false,
+        message: messages.join(", "),
+        error: error.message,
+      });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "Server Error: Failed to update project",
+      message: error.message || "Server Error: Failed to update project",
       error: error.message,
     });
   }
