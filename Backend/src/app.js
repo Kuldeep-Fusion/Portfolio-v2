@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       "https://kuldeep-portfolio-v2.netlify.app",
-      "https://admincms-one.vercel.app"
+      "https://portfolio-admin-v2.netlify.app"
     ],
     credentials: true
   })
